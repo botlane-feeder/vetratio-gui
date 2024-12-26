@@ -1,6 +1,6 @@
 # VetRatio GUI
 
-VetRatio GUI est l'application graphique pour le programme de calculs de ratio alimentaires à partir d'un formulaire afin de diagnostiquer le bon équilibre de l'alimetation animale
+VetRatio GUI est l'application graphique pour le programme de calculs de ratio alimentaires, pour aider à la nutrition animale.
 Cette GUI est développée à partir du framework Svelte.
 
 SvelteJS est un framework JS, qui permet de gérer les vues d'une application web.
