@@ -1,11 +1,13 @@
 <script lang="ts">
-  let {list, choosenFood=$bindable()} = $props();
+  let {list, choosenFood=$bindable(), compositionFood=$bindable()} = $props();
 
   let selectedFood = $state(0);
-  // let choosenFoodList:string[]=$state([]);
 
-  function onclick(){
-    choosenFood.push( list[selectedFood]["title"]);
+  function addFood(){
+    choosenFood.push( selectedFood );
+  }
+  function removeFood(index:number){
+    choosenFood.splice(index,1);
   }
 </script>
 
@@ -21,13 +23,22 @@
     padding:0px;
     text-align: center;
     border-radius: 100px;
-    background-color: #e74c3c;
+    background-color: #E16A54;
+  }
+  .btn-remove{
+    width:25px;
+    height:25px;
+    margin:0px 10px;
+    padding:0px;
+    text-align: center;
+    border-radius: 100px;
+    background-color: #F39E60;
   }
 </style>
 
 <ul>
-  {#each choosenFood as food}
-    <li>{food}</li>
+  {#each compositionFood as oneFood, i}
+    <li>{oneFood["name"]} | { oneFood["quantity"] }  g | <button class="btn btn-remove" onclick={()=>removeFood(i)}>-</button></li>
   {/each}
   <li>
     <select bind:value={selectedFood}>
@@ -35,6 +46,6 @@
         <option value={index}>{food["title"]}</option>
       {/each}
     </select>
-    <button class="btn btn-add" {onclick}>+</button>
+    <button class="btn btn-add" onclick={addFood}>+</button>
   </li>
 </ul>

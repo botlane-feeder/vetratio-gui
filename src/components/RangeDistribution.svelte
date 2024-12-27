@@ -3,6 +3,11 @@
 </script>
 
 <style>
+  span{
+    display:inline-block;
+    width: 60px;
+    text-align: right;
+  }
   .inline-range{
     display:inline;
     width:200px;

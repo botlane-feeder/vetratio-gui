@@ -1,4 +1,6 @@
 <script lang="ts">
+  import {roundTwo} from "../lib/index";
+
   let {
     species = $bindable(),
     currentWeight = $bindable(),
@@ -6,12 +8,14 @@
     idealWeight,
     appliedEnergyNeeded = $bindable(),
     growingActivityPower = $bindable(),
-    maintenanceEnergyNeeded
+    maintenanceEnergyNeeded,
+    proteinNeeded,
+    calciumNeeded,
+    phosphorusNeeded
   } = $props();
 
-  let proteinNeeded=$derived( maintenanceEnergyNeeded * 60 / 1000 );
-  let calciumNeeded=$derived( maintenanceEnergyNeeded * 1.6 / 1000 );
-  let phosphorusNeeded=$derived( maintenanceEnergyNeeded * 1.2 / 1000);
+
+
 </script>
 
 <style>
@@ -55,7 +59,7 @@
 
     <div class="input-group space-input-group">
       <span id="idealWeightLabel" class="input-group-text"> Poids idéal</span>
-      <input id="idealWeight" type="number" class="form-control" disabled value={idealWeight}>
+      <input id="idealWeight" type="number" class="form-control" disabled value={ roundTwo(idealWeight) }>
       <span class="input-group-text" id="idealWeightPostLabel">kg</span>
 
     </div>
@@ -71,8 +75,8 @@
     </div>
 
     <div class="input-group space-input-group">
-      <span id="maintenanceEnergyNeededLabel" class="input-group-text"> BEE (Besoin Énergétique d'Entretien)</span>
-      <input id="maintenanceEnergyNeeded" type="number" class="form-control" disabled bind:value={maintenanceEnergyNeeded}>
+      <span id="maintenanceEnergyNeededLabel" class="input-group-text"> BEE (Besoin Énergétique Entretien)</span>
+      <input id="maintenanceEnergyNeeded" type="number" class="form-control" disabled value={ roundTwo(maintenanceEnergyNeeded) }>
     </div>
   </div>
   <div>
@@ -80,19 +84,19 @@
 
     <div class="input-group space-input-group">
       <span id="proteinNeededLabel" class="input-group-text"> Besoin Protéique</span>
-      <input id="proteinNeeded" type="number" class="form-control" disabled value={proteinNeeded}>
-      <span class="input-group-text" id="proteinNeededPostLabel">g</span>
+      <input id="proteinNeeded" type="number" class="form-control" disabled value={ roundTwo(proteinNeeded) }>
+      <span class="input-group-text" id="proteinNeededPostLabel">g / j</span>
     </div>
     <div class="input-group space-input-group">
       <span id="calciumNeededLabel" class="input-group-text"> Besoin Calcium</span>
-      <input id="calciumNeeded" type="number" class="form-control" disabled value={calciumNeeded}>
-      <span class="input-group-text" id="calciumNeededPostLabel">g</span>
+      <input id="calciumNeeded" type="number" class="form-control" disabled value={ roundTwo(calciumNeeded) }>
+      <span class="input-group-text" id="calciumNeededPostLabel">g / j</span>
 
     </div>
     <div class="input-group space-input-group">
       <span id="phosphorusNeededLabel" class="input-group-text"> Besoin Phosphore</span>
-      <input id="phosphorusNeeded" type="number" class="form-control" disabled value={phosphorusNeeded}>
-      <span class="input-group-text" id="phosphorusNeededPostLabel">g</span>
+      <input id="phosphorusNeeded" type="number" class="form-control" disabled value={ roundTwo(phosphorusNeeded) }>
+      <span class="input-group-text" id="phosphorusNeededPostLabel">g / j</span>
 
     </div>
   </div>
