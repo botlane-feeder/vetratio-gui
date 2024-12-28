@@ -1,19 +1,45 @@
 # VetRatio GUI
 
-Ce fichier commence la documentation technique de l'application VetRatio GUI.
+Ce fichier commence la documentation de l'application VetRatio GUI.
 
 Il s'agit d'une interface graphique qui calcule des ratios alimentaires pour avoir des indications pour le vétérinaire afin de prodiguer des conseils pour la santé de l'animal.
 
 La première version de cette application se concentre sur la constitution d'une ration ménagère.
+La seconde version permettra d'enregistrer et de récupérer des rations ménagères.
+La troisième version permettra de comparer des versions.
 
 ## Fonctionnalités
 
-- Création d'une ration ménagère
+- Création d'une ration ménagère et avoir le détail de sa composition
 
 ## Création d'une ration ménagère
 
-La ration ménagère est la cuisine réalisée par le maitre pour l'alimentation de l'animal (en remplacement des croquettes)
-La ration ménagère doit être composée et suivre une *recette* afin de remplir les différents besoins de l'animal
+La ration ménagère est la cuisine réalisée par le maitre pour l'alimentation de l'animal, en remplacement des croquettes par exemple.  
+La ration ménagère doit être composée d'aliments spécifiques et doit suivre une *recette* afin de remplir les différents besoins de l'animal.  
+
+Au minimum, la ration ménagère doit répondre aux besoins de :  
+- protéines
+- glucides
+- calcium
+- phosphore
+
+## Conception des composants
+
+L'application est le centre de l'application et va sous-traiter un travail, des calculs à d'autres composants :
+- GlobalInfo, est le composant qui permet de renseigner et calculer certaines informations globales de l'animal
+- RecipeComposition, est le composant qui permet de créer une liste d'aliments
+  - RangeDistribution, est le composant qui permet de gérer d'afficher et de renseigner un slider de proportion
+  - FoodList, est le composant qui permet de faire une liste d'aliments, avec (ou sans) calcul automatique de la quantité
+
+Le détails composants et des calculs se trouve dans cette [documentation.](./dev.md)
+
+
+
+# Dev
+
+Définition des composants et des calculs internes
+
+## GlobalInfo
 
 ### Informations préliminaire
 

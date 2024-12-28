@@ -29,10 +29,20 @@ Composition est un composant géré en 5 parties :
 Chacune des parties est décomposés en plusieurs composants.
 - Pour les parties Protéines, Légumes verts et Huiles, nous trouvons 
   - un titre
-  - un slider
-  - une liste 
+  - un `RangeDistribution`
+  - une `FoodList` 
 
 la liste s'ajoute en selectionnant des aliments et en les ajoutant, puis en calculant la quantité d'aliment à nécessaire pour répondre au besoin de l'animal
 
 se reposant sur plusieurs composants :
 - 
+
+
+### FoodList
+
+Crée une liste d'ingrédients selectionnés, à partir d'une base de données passées en paramètres.
+
+Si FoodList a un calcul automatique des quantités, alors
+- cette liste est retravaillée, pour calculer la quantité correspondante au
+  - besoin spécifique calculé (ex : protéine, calcium, phosphore)
+  - curseur selectionné
