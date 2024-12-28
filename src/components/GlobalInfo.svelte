@@ -14,8 +14,6 @@
     phosphorusNeeded
   } = $props();
 
-
-
 </script>
 
 <style>
