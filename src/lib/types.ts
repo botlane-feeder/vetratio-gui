@@ -1,2 +1,1 @@
-export type FoodCompositionType = {name:string; quantity:number; protein:number;};
-// export type FoodCompositionType = {name:string; quantity:number; protein:number; glucide:number; calcium:number; phosphore:number;};
+export type FoodComposition = {name:string; quantity:number; protein:number; kcal:number; calcium:number; phosphorus:number;};

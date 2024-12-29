@@ -6,12 +6,12 @@
     currentWeight = $bindable(),
     bodyConditionScore = $bindable(),
     idealWeight,
-    appliedEnergyNeeded = $bindable(),
+    appliedEnergyNeed = $bindable(),
     growingActivityPower = $bindable(),
-    maintenanceEnergyNeeded,
-    proteinNeeded,
-    calciumNeeded,
-    phosphorusNeeded
+    maintenanceEnergyNeed,
+    proteinNeed,
+    calciumNeed,
+    phosphorusNeed
   } = $props();
 
 </script>
@@ -64,7 +64,7 @@
     
     <div class="input-group space-input-group">
       <span id="AENLabel" class="input-group-text"> BEA (Besoin Énergétique Appliqué)</span>
-      <input id="AEN" type="number" class="form-control" bind:value={appliedEnergyNeeded}>
+      <input id="AEN" type="number" class="form-control" bind:value={appliedEnergyNeed}>
     </div>
 
     <div class="input-group space-input-group">
@@ -74,7 +74,7 @@
 
     <div class="input-group space-input-group">
       <span id="maintenanceEnergyNeededLabel" class="input-group-text"> BEE (Besoin Énergétique Entretien)</span>
-      <input id="maintenanceEnergyNeeded" type="number" class="form-control" disabled value={ roundTwo(maintenanceEnergyNeeded) }>
+      <input id="maintenanceEnergyNeeded" type="number" class="form-control" disabled value={ roundTwo(maintenanceEnergyNeed) }>
     </div>
   </div>
   <div>
@@ -82,18 +82,18 @@
 
     <div class="input-group space-input-group">
       <span id="proteinNeededLabel" class="input-group-text"> Besoin Protéique</span>
-      <input id="proteinNeeded" type="number" class="form-control" disabled value={ roundTwo(proteinNeeded) }>
+      <input id="proteinNeeded" type="number" class="form-control" disabled value={ roundTwo(proteinNeed) }>
       <span class="input-group-text" id="proteinNeededPostLabel">g / j</span>
     </div>
     <div class="input-group space-input-group">
       <span id="calciumNeededLabel" class="input-group-text"> Besoin Calcium</span>
-      <input id="calciumNeeded" type="number" class="form-control" disabled value={ roundTwo(calciumNeeded) }>
+      <input id="calciumNeeded" type="number" class="form-control" disabled value={ roundTwo(calciumNeed) }>
       <span class="input-group-text" id="calciumNeededPostLabel">g / j</span>
 
     </div>
     <div class="input-group space-input-group">
       <span id="phosphorusNeededLabel" class="input-group-text"> Besoin Phosphore</span>
-      <input id="phosphorusNeeded" type="number" class="form-control" disabled value={ roundTwo(phosphorusNeeded) }>
+      <input id="phosphorusNeeded" type="number" class="form-control" disabled value={ roundTwo(phosphorusNeed) }>
       <span class="input-group-text" id="phosphorusNeededPostLabel">g / j</span>
 
     </div>
