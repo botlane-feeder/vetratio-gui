@@ -23,9 +23,9 @@
       list.push(carbohydrateCompositionFood[index]);
     }
     return list;
-  }
+  } 
   function array_reduce():FoodComposition[]{
-    return array_merge().reduce((acc, current) => {
+    return array_merge().reduce((acc:FoodComposition[], current:FoodComposition) => {
         // Vérifiez si l'élément avec le même nom existe déjà dans l'accumulateur
         const existing = acc.find(item => item.name === current.name);
 
