@@ -3,7 +3,7 @@
   import FoodList from "./FoodList.svelte"
   import ResumeNutritionalIntake from "./ResumeNutritionalIntake.svelte"
 
-  import ResumeSummary from "../components/ResumeSummary.svelte"
+  import RecipeSummary from "./RecipeSummary.svelte"
 
   import {roundTwo} from "$lib/index"
   import {type FoodComposition} from "$lib/types"
@@ -17,7 +17,7 @@
     [
       {"title":"Viande hachée cuite 5%", "kcal":1550, "protein":25.5, "calcium":7, "phosphorus":180},
       {"title":"Viande hachée cuite 15%", "kcal":2390, "protein":23.6, "calcium":15, "phosphorus":198},
-      {"title":"Blanc de poulet cuit", "kcal":1410, "protein":30.1, "calcium":4.7, "pho":270},
+      {"title":"Blanc de poulet cuit", "kcal":1410, "protein":30.1, "calcium":4.7, "phosphorus":270},
     ],
     "greenVegetable":[
       {"title":"Haricots Verts", "kcal":1550, "protein":1.95, "calcium":7, "phosphorus":180},
@@ -50,8 +50,8 @@
         "quantity":quantityNeeded,
         "protein":(rawAlimentList["protein"][choosenProteinFood[index]]["protein"]*quantityNeeded/100),
         "kcal":(rawAlimentList["protein"][choosenProteinFood[index]]["kcal"]*quantityNeeded/1000),
-        "calcium":0,
-        "phosphorus":0
+        "calcium":(rawAlimentList["protein"][choosenProteinFood[index]]["calcium"]*quantityNeeded/100000),
+        "phosphorus":(rawAlimentList["protein"][choosenProteinFood[index]]["phosphorus"]*quantityNeeded/100000)
       });
     }
     return foodArray;
@@ -96,8 +96,8 @@
         "quantity":quantityNeeded,
         "protein":(rawAlimentList["oil"][choosenOilFood[index]]["protein"]*quantityNeeded/100),
         "kcal":(rawAlimentList["oil"][choosenOilFood[index]]["kcal"]*quantityNeeded/1000),
-        "calcium":(rawAlimentList["greenVegetable"][choosenGreenVegetableFood[index]]["calcium"]*quantityNeeded/100000),
-        "phosphorus":(rawAlimentList["greenVegetable"][choosenGreenVegetableFood[index]]["phosphorus"]*quantityNeeded/100000)
+        "calcium":(rawAlimentList["oil"][choosenOilFood[index]]["calcium"]*quantityNeeded/100000),
+        "phosphorus":(rawAlimentList["oil"][choosenOilFood[index]]["phosphorus"]*quantityNeeded/100000)
       });
     }
     // foodCompositionList.set();
@@ -125,8 +125,8 @@
         "quantity":quantityNeeded,
         "protein":(rawAlimentList["carbohydrate"][choosenCarbohydrateFood[index]]["protein"]*quantityNeeded/100),
         "kcal":(rawAlimentList["carbohydrate"][choosenCarbohydrateFood[index]]["kcal"]*quantityNeeded/1000),
-        "calcium":(rawAlimentList["greenVegetable"][choosenGreenVegetableFood[index]]["calcium"]*quantityNeeded/100000),
-        "phosphorus":(rawAlimentList["greenVegetable"][choosenGreenVegetableFood[index]]["phosphorus"]*quantityNeeded/100000)
+        "calcium":(rawAlimentList["carbohydrate"][choosenCarbohydrateFood[index]]["calcium"]*quantityNeeded/100000),
+        "phosphorus":(rawAlimentList["carbohydrate"][choosenCarbohydrateFood[index]]["phosphorus"]*quantityNeeded/100000)
       });
     }
     // foodCompositionList.set();
@@ -186,6 +186,10 @@
 
   <div class="col-6">
     <ResumeNutritionalIntake {proteinCompositionFood} {greenVegetableCompositionFood} {oilCompositionFood} {carbohydrateCompositionFood} />
+  </div>
+
+  <div class="col-12">
+    <RecipeSummary {proteinCompositionFood} {greenVegetableCompositionFood} {oilCompositionFood} {carbohydrateCompositionFood} />
   </div>
 
 </div>
