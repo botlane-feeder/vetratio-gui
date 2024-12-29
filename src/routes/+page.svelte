@@ -3,8 +3,6 @@
 
   import GlobalInfo from "../components/GlobalInfo.svelte"
   import RecipeComposition from "../components/RecipeComposition.svelte"
-  import ResumeComposition from "../components/ResumeComposition.svelte"
-  import ResumeSummary from "../components/ResumeSummary.svelte"
 
   import {type FoodComposition} from "$lib/types"
   // import {foodComposition} from "$lib/data/FoodComposition"
@@ -77,11 +75,7 @@
       {phosphorusNeed}
     />
   </div>
-  <div class="col-9">
-    <div class="row sectionContainer">
+  <div class="col-9 sectionContainer">
       <RecipeComposition {proteinNeed} energyNeed={appliedEnergyNeed} {oilNeed}/>
-      <ResumeComposition {foodCompositionList}/>
-    </div>
-    <!-- <ResumeSummary/> -->
   </div>
 </div>
