@@ -6,11 +6,12 @@
   import ResumeSummary from "../components/ResumeSummary.svelte"
 
   import {roundTwo} from "$lib/index"
-
   import {type FoodComposition} from "$lib/types"
 
+  // Récupération des informations calculées du globalInfo
   let {proteinNeed, energyNeed, oilNeed} = $props()
 
+  // Récupération de la base de données globales des aliments
   const rawAlimentList={
     "protein":
     [
@@ -24,7 +25,7 @@
       {"title":"Poivrons", "kcal":363, "protein":30.1, "calcium":4.7, "phosphorus":270},
     ],
     "oil":[
-      {"title":"Huile d'Olive", "kcal":1550, "protein":0, "calcium":0, "phosphorus":0},
+      {"title":"Huile d'Olive", "kcal":0, "protein":0, "calcium":0, "phosphorus":0},
     ],
     "carbohydrate":[
       {"title":"Riz Blanc, cuit, non salé", "kcal":1440, "protein":2.92, "calcium": 14, "phosphorus":35},
@@ -72,8 +73,8 @@
         "quantity":quantityNeeded,
         "protein":(rawAlimentList["greenVegetable"][choosenGreenVegetableFood[index]]["protein"]*quantityNeeded/100),
         "kcal":(rawAlimentList["greenVegetable"][choosenGreenVegetableFood[index]]["kcal"]*quantityNeeded/1000),
-        "calcium":0,
-        "phosphorus":0
+        "calcium":(rawAlimentList["greenVegetable"][choosenGreenVegetableFood[index]]["calcium"]*quantityNeeded/100000),
+        "phosphorus":(rawAlimentList["greenVegetable"][choosenGreenVegetableFood[index]]["phosphorus"]*quantityNeeded/100000)
       });
     }
     // foodCompositionList.set();
@@ -95,8 +96,8 @@
         "quantity":quantityNeeded,
         "protein":(rawAlimentList["oil"][choosenOilFood[index]]["protein"]*quantityNeeded/100),
         "kcal":(rawAlimentList["oil"][choosenOilFood[index]]["kcal"]*quantityNeeded/1000),
-        "calcium":0,
-        "phosphorus":0
+        "calcium":(rawAlimentList["greenVegetable"][choosenGreenVegetableFood[index]]["calcium"]*quantityNeeded/100000),
+        "phosphorus":(rawAlimentList["greenVegetable"][choosenGreenVegetableFood[index]]["phosphorus"]*quantityNeeded/100000)
       });
     }
     // foodCompositionList.set();
@@ -104,12 +105,15 @@
   });
 
   /**************************** Données pour les glucides ****************************/
-  let carbohydratesEnergyNeed = $derived.by(()=>{
-    let greenVegetableEnergy = 0;
-    for (let index = 0; index < greenVegetableCompositionFood.length; index++) {
-      greenVegetableEnergy += greenVegetableCompositionFood[index]["kcal"];
+  let carbohydratesEnergyNeed:number = $derived.by(()=>{
+    let energyAvailable:number = 0;
+    for (let index = 0; index < proteinCompositionFood.length; index++) {
+      energyAvailable += proteinCompositionFood[index]["kcal"];
     }
-    return energyNeed - greenVegetableEnergy;
+    for (let index = 0; index < greenVegetableCompositionFood.length; index++) {
+      energyAvailable += greenVegetableCompositionFood[index]["kcal"];
+    }
+    return energyNeed - energyAvailable;
   })
   let choosenCarbohydrateFood:number[]=$state([]);
   let carbohydrateCompositionFood:FoodComposition[]=$derived.by(()=>{
@@ -121,8 +125,8 @@
         "quantity":quantityNeeded,
         "protein":(rawAlimentList["carbohydrate"][choosenCarbohydrateFood[index]]["protein"]*quantityNeeded/100),
         "kcal":(rawAlimentList["carbohydrate"][choosenCarbohydrateFood[index]]["kcal"]*quantityNeeded/1000),
-        "calcium":0,
-        "phosphorus":0
+        "calcium":(rawAlimentList["greenVegetable"][choosenGreenVegetableFood[index]]["calcium"]*quantityNeeded/100000),
+        "phosphorus":(rawAlimentList["greenVegetable"][choosenGreenVegetableFood[index]]["phosphorus"]*quantityNeeded/100000)
       });
     }
     // foodCompositionList.set();
