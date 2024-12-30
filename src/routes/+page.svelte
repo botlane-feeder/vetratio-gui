@@ -9,22 +9,21 @@
 
   const settings:any={
     "maintenanceEnergyNeededFactor":{"dog":130, "cat":100},
-    "idealWeightPow":{"dog":0.75, "cat":0.67}
+    "idealWeightPow":{"dog":0.75, "cat":0.67},
+    "proteinFactor":{"dog":60, "cat":65},
   }
   // Données de paramétrage
   let species:string = $state("cat");
   let currentWeight:number = $state(5);
-  let bodyConditionScore:number = $state(3); //NEC
+  let bodyConditionScore:number = $state(5); //NEC
   let idealWeight:number = $derived( currentWeight * ( 1 - ( bodyConditionScore - 5)/10 ) );
-  let appliedEnergyNeed:number = $state(360);
-  let growingActivityPower:number = $state(1);
+  let appliedEnergyNeed:number = $state(200);
   
   // Données des besoins
-  let maintenanceEnergyNeed:number = $derived( settings["maintenanceEnergyNeededFactor"][species] * Math.pow(idealWeight, settings["idealWeightPow"][species]) * growingActivityPower );
-  let proteinNeed:number=$derived( maintenanceEnergyNeed * 60 / 1000 );
+  let maintenanceEnergyNeed:number = $derived( settings["maintenanceEnergyNeededFactor"][species] * Math.pow(idealWeight, settings["idealWeightPow"][species]) );
+  let proteinNeed:number=$derived( maintenanceEnergyNeed * settings["proteinFactor"][species] / 1000 );
   let calciumNeed:number=$derived( maintenanceEnergyNeed * 1.6 / 1000 );
   let phosphorusNeed:number=$derived( maintenanceEnergyNeed * 1.2 / 1000);
-  let oilNeed:number=$state(10);
 
   // Données des listes de compositions
   let proteinList:FoodComposition[]=$state([]);
@@ -68,7 +67,6 @@
       bind:bodyConditionScore
       {idealWeight}
       bind:appliedEnergyNeed
-      bind:growingActivityPower
       {maintenanceEnergyNeed}
       {proteinNeed}
       {calciumNeed}
@@ -76,6 +74,6 @@
     />
   </div>
   <div class="col-9 sectionContainer">
-      <RecipeComposition {proteinNeed} energyNeed={appliedEnergyNeed} {oilNeed}/>
+      <RecipeComposition {proteinNeed} energyNeed={appliedEnergyNeed} {calciumNeed}/>
   </div>
 </div>

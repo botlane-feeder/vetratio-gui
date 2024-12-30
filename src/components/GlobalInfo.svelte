@@ -7,7 +7,6 @@
     bodyConditionScore = $bindable(),
     idealWeight,
     appliedEnergyNeed = $bindable(),
-    growingActivityPower = $bindable(),
     maintenanceEnergyNeed,
     proteinNeed,
     calciumNeed,
@@ -65,11 +64,6 @@
     <div class="input-group space-input-group">
       <span id="AENLabel" class="input-group-text"> BEA (Besoin Énergétique Appliqué)</span>
       <input id="AEN" type="number" class="form-control" bind:value={appliedEnergyNeed}>
-    </div>
-
-    <div class="input-group space-input-group">
-      <span id="growingActivityPowerLabel" class="input-group-text"> Facteur de croissance ou d'activité</span>
-      <input id="growingActivityPower" type="number" class="form-control" bind:value={growingActivityPower}>
     </div>
 
     <div class="input-group space-input-group">

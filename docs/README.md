@@ -137,6 +137,9 @@ Données initiales :
 
 ## TODO
 
+- Ajouter un select de "statut phisiologique" : [entretien, lactation, gestation, debutCroissance, finCroissance]
+  - ["lactation"]["protein"]["chien"],  ["gestation"]["calcium"]["chat"], ...
+
 - Selection des données de l'animal pour récupération des données physiologiques stockées ...
 - Calcul des ratios
 - Enregistrement et historique des consommations alimentaires

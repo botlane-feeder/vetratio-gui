@@ -2,7 +2,7 @@
   import {roundTwo} from "$lib/index"
   import type { FoodComposition } from "$lib/types";
 
-  let {proteinCompositionFood, greenVegetableCompositionFood, oilCompositionFood, carbohydrateCompositionFood}=$props();
+  let {proteinCompositionFood, greenVegetableCompositionFood, oilCompositionFood, carbohydrateCompositionFood, amvCompositionFood}=$props();
 
   let recipe:FoodComposition[] = $derived.by(()=>{
     return array_reduce();
@@ -21,6 +21,9 @@
     }
     for (let index = 0; index < carbohydrateCompositionFood.length; index++) {
       list.push(carbohydrateCompositionFood[index]);
+    }
+    for (let index = 0; index < amvCompositionFood.length; index++) {
+      list.push(amvCompositionFood[index]);
     }
     return list;
   } 
