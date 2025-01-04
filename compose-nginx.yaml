@@ -1,0 +1,13 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: conf/Dockerfile
+  web:
+    build:
+      context: .
+      dockerfile: conf/nginx/Dockerfile
+    ports:
+      - 8080:80
+    depends_on:
+      - frontend
