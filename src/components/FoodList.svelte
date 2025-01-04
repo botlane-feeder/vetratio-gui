@@ -23,7 +23,7 @@
     padding:0px;
     text-align: center;
     border-radius: 100px;
-    background-color: #E16A54;
+    background-color: var(--color-green);
   }
   .btn-remove{
     width:25px;
@@ -32,7 +32,7 @@
     padding:0px;
     text-align: center;
     border-radius: 100px;
-    background-color: #F39E60;
+    background-color: var(--color-orange);
   }
 </style>
 

@@ -1,5 +1,6 @@
 <script>
   import 'bootstrap/dist/css/bootstrap.min.css';
+  import "../styles/variables.css"
 
   let { children } = $props();
 

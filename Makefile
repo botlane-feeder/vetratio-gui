@@ -33,6 +33,9 @@ push_node_nginx: build_node_nginx
 # Lance tous les push
 push_all: push_node push_node_nginx
 
+dev:
+	@npm run dev
+
 up:
 	@docker compose up
 
