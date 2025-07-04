@@ -8,6 +8,20 @@ La première version de cette application se concentre sur la constitution d'une
 La seconde version permettra d'enregistrer et de récupérer des rations ménagères.
 La troisième version permettra de comparer des versions.
 
+## Contexte
+
+- 5 à 10% des propriétaires cuisinent pour leur animaux, et il faut indiquer la composition
+- Difficultés de calculer les rations ménagères
+  - dans une ration on retrouve 5 source
+    - protéique
+    - glucidique
+    - huile
+    - légumes verts
+    - AMV (aliment minéraux et vitamines)
+  - difficile de changer le pourcentage pour identifier la ration ménagère
+- Mesurer la cuisine à réaliser et comparer les apports aux besoins de l'animal
+
+
 ## Fonctionnalités
 
 - Création d'une ration ménagère et avoir le détail de sa composition
@@ -137,7 +151,22 @@ Données initiales :
 
 ## TODO
 
-- Ajouter un select de "statut phisiologique" : [entretien, lactation, gestation, debutCroissance, finCroissance]
+- Reprendre le responsive du site : 
+  - selon la largeur de l'écran afficher ou mettre en option le "Renseignement de l'animal"
+  - la taille des labels et des inputs
+- Reprendre le design
+  - Charte graphique
+  - Typographie : police, taille, couleurs
+  - Bordure des cartes
+- Sortir les calculs dans une librairie
+  - Ajouter des tests de validation
+- Ajouter un mode auto-calcul des quantités
+- Gérer le design des composants :
+  - select, (+)
+  - une ligne de nouriture, quantité, (-)
+- Rendre l'affichage de la recette plus jolie
+
+- Ajouter un select de "statut physiologique" : [entretien, lactation, gestation, debutCroissance, finCroissance]
   - ["lactation"]["protein"]["chien"],  ["gestation"]["calcium"]["chat"], ...
 
 - Selection des données de l'animal pour récupération des données physiologiques stockées ...

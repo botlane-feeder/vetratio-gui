@@ -183,13 +183,13 @@
 </script>
 
 <style>
-  .sectionContainer{
+  /* .sectionContainer{
     border:solid grey 1px;
     border-radius: 5px;
     box-shadow: 5px 5px 5px grey;
     padding: 8px;
     margin: 20px 0px;
-  }
+  } */
   .titleContent{
     color: #413e3e;
     font-size:20px;

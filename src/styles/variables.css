@@ -1,4 +1,28 @@
 :root {
+
+  /* --primary-color:#F6F193;
+  --secondary-color:#A5DD9B;
+  --third-color:#F2C18D;
+  --fourth-color:#C5EBAA; */
+  --primary-color: #a7c957; /* (principal) : Vert pastel*/
+  --secondary-color: #d4e6a5; /* (secondaire) : Vert pastel clair*/
+  --primary-accent-color: #6b8cae; /* (accent) : Bleu pastel*/
+  --secondary-accent-color: #ffd166; /* (accent) : Jaune pastel*/
+  --background-color: #f8f9fa; /* (arrière-plan) : Fond clair*/
+  --background-white: #FFFFFF; /* (arrière-plan) : Fond clair*/
+  --dark-color-font: #2a4d69; /* (texte) : Bleu foncé*/
+
+
+  /* Générated */
+
+  --g-primary-color: #a7c957; /* (principal) : Vert pastel*/
+  --g-secondary-color: #d4e6a5; /* (secondaire) : Vert pastel clair*/
+  --g-primary-accent-color: #6b8cae; /* (accent) : Bleu pastel*/
+  --g-secondary-accent-color: #ffd166; /* (accent) : Jaune pastel*/
+  --g-background-color: #f8f9fa; /* (arrière-plan) : Fond clair*/
+  --g-font-color: #2a4d69; /* (texte) : Bleu foncé*/
+
+
   --color-green:#B7E5B4;
   --color-orange:#FFA447;
   --color-red:#F28585;

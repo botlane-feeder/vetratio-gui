@@ -6,6 +6,31 @@ L'interface graphique doit gérer ce qu'on appelle les rations ménagères, pour
 - Nutriment : partie qui permet de calculer l'apport de nutriment
 - Recette : partie qui résume la liste des ingrédients pour la copier/coller
 
+## V1
+
+Chemin de dépendances : 
+- RecipeSumary : liste des ingrédients pour faire une ration alimentaire
+  - a besoin de
+    - list : la liste des aliments selectionnés
+- FoodIntakes : représente les apports nutritifs de la ration alimentaire
+  - a besoin de 
+    - list : la liste des aliments selectionnés
+
+- list : la liste des aliments selectionnées
+  - avec la quantité pour chaque ligne de nouritures
+  - a besoin de
+    - calculatedInfo : les besoin de l'animal en terme d'apport
+    - percentages : un pourcentage d'attribution pour un aliment
+    - addFood() : une fonction pour ajouter un aliment à la liste par l
+    - calculationQuantity() : une fonction pour calculer automatiquement les quantités pour chaque aliment
+
+- calculatedInfo : des données calculées sur le besoin de l'animal
+  - a besoin de
+    - paramètres
+    - données de l'animal à renseigner par l'utilisateur
+
+Ce chemin des dépendances permet de savoir sur quelle(s) dépendance(s) doit observer une variable pour être calculée
+
 ## Détails
 
 Toutes ces parties sont gérées par un
