@@ -10,13 +10,13 @@
 
 </script>
 
-<div class="container">
+<div class="container" class:shadow={show}>
   {#if show}
   <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
   <div transition:slide >
     <header onclick={()=>{show = false;}}>
       Renseignements sur l'animal
-      <i class="bi bi-arrow-left-square-fill"></i>      
+      <i class="bi bi-arrow-up-left-square-fill"></i>      
     </header>
     <div class="animalInfo">
       <div class="formGroup">
@@ -39,14 +39,16 @@
         <input id="idealWeight" type="number" disabled value={$calculatedInfo["idealWeight"]}/>
       </div>
       <div class="formGroup">
-        <label for="idealWeight" title="Calculé à partir du poids idéal">BEE (Besoin Énergétique Entretien) : </label>
-        <input id="idealWeight" type="number" disabled value={$calculatedInfo["maintenanceEnergyNeed"]}/>
-      </div>
-      <div class="formGroup">
         <label for="idealWeight" title="">BEA (Besoin Énergétique Appliqué) : </label>
         <input id="idealWeight" type="number" bind:value={$globalInfo["appliedEnergyNeed"]}/>
       </div>
-      <div>Besoins spécifiques</div>
+      <div class="formGroup">
+        <label for="idealWeight" title="Calculé à partir du poids idéal">BEE (Besoin Énergétique Entretien) : </label>
+        <input id="idealWeight" type="number" disabled value={$calculatedInfo["maintenanceEnergyNeed"]}/>
+      </div>
+    </div>
+    <div class="specificNeed">
+      <!-- <div class="bold">Besoins spécifiques : </div> -->
       <div class="formGroup">
         <label for="idealWeight" title="">Besoin Protéique (g/j) : </label>
         <input id="idealWeight" type="number" disabled value={$calculatedInfo["proteinNeed"]}/>
@@ -64,8 +66,7 @@
   {:else}
   <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
     <header class="closed" transition:slide onclick={()=>{show = true;}}>
-    <!-- <header class="closed" transition:fly={{ y: -200 }}> -->
-      <i class="bi bi-arrow-right-square-fill"></i>
+      <i class="bi bi-arrow-down-square-fill"></i>
     </header>
   {/if}
 
@@ -76,10 +77,14 @@
   .container {
     background: white;
     border-right: 1px solid var(--primary-color);
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    width: 380px;
+    transition: all 0.3s ease;
+    box-shadow: 0px 0px;
+  }
+  .shadow{
+    box-shadow: 10px 40px 20px rgba(0, 0, 0, 0.5);
   }
   header{
-    width: 300px;
     padding: 1rem;
     border-bottom: 1px solid #D4E6A5;
     display: flex;
@@ -93,11 +98,18 @@
   }
   header.closed{
     width: auto;
+    height:5px;
+    margin-inline:auto;
+    justify-content: center;
   }
 
   .animalInfo {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .specificNeed{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
   }
   .formGroup {
     display: flex;
@@ -107,7 +119,7 @@
 
   .formGroup label {
     font-weight: 500;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
 
   .formGroup input,
@@ -116,7 +128,8 @@
     border: 1px solid #A7C957;
     background-color: var(--background-white);
     border-radius: 4px;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    width: 80%;
     /* cursor: pointer; */
   }
   select:not(disabled){
@@ -136,5 +149,17 @@
     border-color: var(--secondary-color);
     box-shadow: 0 0 0 2px rgba(107, 140, 174, 0.2);
     cursor:not-allowed;
+  }
+
+  @media (max-width:400px){
+    .container {
+      width:300px;
+    }
+    .animalInfo {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    .specificNeed{
+      grid-template-columns: repeat(1, 1fr);
+    }
   }
 </style>
