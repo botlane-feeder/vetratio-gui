@@ -73,7 +73,7 @@
   }
   .select-wrapper {
     position: relative;
-    width: 30%;
+    width:100%;
   }
   select{
     width: 100%;

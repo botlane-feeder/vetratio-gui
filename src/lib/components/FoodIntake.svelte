@@ -25,10 +25,10 @@
     background: white;
     border-right: 1px solid var(--primary-color);
     box-shadow: 2px 10px 10px 10px rgba(0, 0, 0, 0.1);
-    min-height: 300px;
+    width: 300px;
+    min-height: 250px;
   }
   header{
-    width: 250px;
     padding: 1rem;
     border-bottom: 1px solid #D4E6A5;
     display: flex;
