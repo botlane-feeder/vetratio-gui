@@ -12,6 +12,10 @@
   --background-white: #FFFFFF; /* (arrière-plan) : Fond clair*/
   --dark-color-font: #2a4d69; /* (texte) : Bleu foncé*/
 
+  --action-button-green: #a5d6a7;
+  --action-button-red: #ef9a9a;
+
+
 
   /* Générated */
 
@@ -23,7 +27,7 @@
   --g-font-color: #2a4d69; /* (texte) : Bleu foncé*/
 
 
-  --color-green:#B7E5B4;
-  --color-orange:#FFA447;
-  --color-red:#F28585;
+  --action-color-green:#B7E5B4;
+  --action-color-orange:#FFA447;
+  --action-color-red:#F28585;
 }

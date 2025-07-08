@@ -58,11 +58,11 @@ function createList(list:foodListType){
 
   return{
     subscribe,
+    getList(){ return list;},
     addFood(categorie:listCategorieType, oneFood:settingsFoodFeatureType){
       update((list)=>{
         // let newFood :foodFeatureType= {...oneFood, quantity:0};
         list[categorie].push( {...oneFood, quantity:0} );
-        console.log(list);
         return list
       });
       this.calculateFoodQuantity();
@@ -87,28 +87,76 @@ function createList(list:foodListType){
         update((list)=>{
           // SI auto-calcul
           list["protein"] = this.calculatedProteinFoodQuantity(list["protein"]);
+          list["vegetable"] = this.calculatedVegetableFoodQuantity(list["vegetable"]);
+          list["oil"] = this.calculatedOilFoodQuantity(list["oil"]);
+          list["carbohydrate"] = this.calculatedCarbohydrateFoodQuantity(list["carbohydrate"], this.getCarbohydrateNeed(list));
           return list;
         });
       }
     },
     calculatedProteinFoodQuantity(list:foodFeatureType[]){
-      let amount = list.length;
-      let proteinNeeded = get(calculatedInfo)["proteinNeed"] * get(percentages)["protein"];
-      // console.log("amount : "+amount+" proteinNeeded : "+proteinNeeded );
+      let foodAmount = list.length;
+      let proteinNeeded = get(calculatedInfo)["proteinNeed"]*100 * get(percentages)["protein"]/100;
+      // Par chaque aliment, calcule du nombre de quantité nécessaire
       for (let index = 0; index < list.length; index++) {
-        
-        let quantity = (proteinNeeded/amount) / list[index]["protein"];
+        let quantity = (proteinNeeded/foodAmount) / list[index]["protein"];
         list[index]["quantity"] = quantity;
-        // console.log( list["protein"][index]["title"]+" : "+quantity+" = "+quantity * list["protein"][index]["protein"]);
+      }
+      return list;
+    },
+    calculatedVegetableFoodQuantity(list:foodFeatureType[]){
+      let foodAmount = list.length;
+      let energyNeeded = get(globalInfo)["appliedEnergyNeed"]*1000 * get(percentages)["vegetable"]/100;
+      // Par chaque aliment, calcule du nombre de quantité nécessaire
+      for (let index = 0; index < list.length; index++) {
+        let quantity = (energyNeeded/foodAmount) / list[index]["kcal"];
+        list[index]["quantity"] = quantity;
+      }
+      return list;
+    },
+    calculatedOilFoodQuantity(list:foodFeatureType[]){
+      let foodAmount = list.length;
+      let energyNeeded = get(globalInfo)["appliedEnergyNeed"]*1000 * get(percentages)["oil"]/100;
+      // Par chaque aliment, calcule du nombre de quantité nécessaire
+      for (let index = 0; index < list.length; index++) {
+        let quantity = (energyNeeded/foodAmount) / list[index]["kcal"];
+        list[index]["quantity"] = quantity;
+      }
+      return list;
+    },
+    getCarbohydrateNeed(list:foodListType):number{
+      // Calcule des calories ingérés par les protéines
+      let proteinesEnergy=0;
+      for (let index = 0; index < list["protein"].length; index++) {
+        proteinesEnergy+=list["protein"][index]["quantity"] * list["protein"][index]["kcal"];
+      }
+      // Calcule des calories ingérés par les légumes verts
+      let vegetableEnergy=0;
+      for (let index = 0; index < list["vegetable"].length; index++) {
+        vegetableEnergy+=list["vegetable"][index]["quantity"] * list["vegetable"][index]["kcal"];
+      }
+      // Calcule des calories ingérés par l'huile
+      let oilEnergy=0;
+      for (let index = 0; index < list["oil"].length; index++) {
+        vegetableEnergy+=list["oil"][index]["quantity"] * list["oil"][index]["kcal"];
+      }
+      return get(globalInfo)["appliedEnergyNeed"]*1000 - proteinesEnergy - vegetableEnergy - oilEnergy;
+    },
+    calculatedCarbohydrateFoodQuantity(list:foodFeatureType[], carbohydrateEnergyNeed:number){
+      let foodAmount = list.length;
+      // Par chaque aliment, calcule du nombre de quantité nécessaire
+      for (let index = 0; index < list.length; index++) {
+        let quantity = (carbohydrateEnergyNeed/foodAmount) / list[index]["kcal"];
+        list[index]["quantity"] = quantity;
       }
       return list;
     }
   }
 }
 export const myList = createList(initList);
+globalInfo.subscribe( (globalInfo) =>{ myList.calculateFoodQuantity(); })
+calculatedInfo.subscribe( (calculatedInfo) =>{ myList.calculateFoodQuantity(); })
 percentages.subscribe( (percentages) =>{ myList.calculateFoodQuantity(); })
-
-derived(percentages, ($percentages)=>{console.log($percentages)});
 
 /** Intakes, gestion des apports
  * 
@@ -122,7 +170,6 @@ type FoodIntakesType = {
   phosphorusAMV:number
 };
 export const intakes:Readable<FoodIntakesType> = derived(myList,($myList:foodListType)=>{
-  console.log("Calcul des intakes");
   let intakes = {
     protein:0,
     energy:0,
@@ -131,9 +178,13 @@ export const intakes:Readable<FoodIntakesType> = derived(myList,($myList:foodLis
     phosphorus:0,
     phosphorusAMV:0
   }
+
   for(let elem in $myList){
     for (let index = 0; index < $myList[elem].length; index++) {
       intakes["protein"] += $myList[elem][index]["protein"] * $myList[elem][index]["quantity"]/100;
+      intakes["energy"] += $myList[elem][index]["kcal"] * $myList[elem][index]["quantity"]/1000;
+      intakes["calcium"] += $myList[elem][index]["calcium"] * $myList[elem][index]["quantity"]/100;
+      intakes["phosphorus"] += $myList[elem][index]["phosphorus"] * $myList[elem][index]["quantity"]/100;
     }
   }
   return intakes;
@@ -144,10 +195,38 @@ export const intakes:Readable<FoodIntakesType> = derived(myList,($myList:foodLis
  * 
  */
 
-const foodList = derived(myList, ()=>{
-  console.log("Création de la liste des ingrédients");
-  return [];
+export const ingredientList = derived(myList, ()=>{
+
+  function array_merge(foodList:foodListType):foodFeatureType[]{
+    let list:foodFeatureType[] = [];
+    for(let elem in foodList){
+      for (let index = 0; index < foodList[elem].length; index++) {
+        list.push(foodList[elem][index]);
+      }
+    }
+    return list;
+  } 
+  function array_reduce(list:foodListType):foodFeatureType[]{
+    return array_merge(list).reduce((acc:foodFeatureType[], current:foodFeatureType) => {
+        // Vérifiez si l'élément avec le même nom existe déjà dans l'accumulateur
+        const existing = acc.find(item => item.title === current.title);
+
+        if (existing) {
+            // Si l'élément existe, ajoutez la quantité
+            existing.quantity += current.quantity;
+        } else {
+            // Sinon, ajoutez l'élément à l'accumulateur
+            acc.push({ ...current });
+        }
+
+        return acc;
+    }, []);
+  }
+
+  return array_reduce({...myList.getList()}); //ingredientList;
 });
+
+
 
 /* Fonctionnalités
 - stockage des différentes listes
